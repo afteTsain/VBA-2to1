@@ -3,7 +3,7 @@ Sub 单工作簿转换()
 
 Dim r, c '数据源表格的最后非空单元格
 Dim wb As Workbook, range2 As Worksheet, wb2 As Workbook
-Dim month, row_num, year, m, t
+Dim month, row_num, year, m, t，user
 '保养计划表wb '明细表range2
 Application.ScreenUpdating = False
     Set wb2 = Workbooks.Add(xlWBATWorksheet)
@@ -81,9 +81,13 @@ Application.ScreenUpdating = False
 '        Loop
     Columns.EntireColumn.AutoFit
     t = Timer - t
-      wb2.sheet(1).Range("A1:E1").AutoFilter
+        range2.Range("A1:E1").AutoFilter
     Application.ScreenUpdating = True
-    MsgBox "完工" & Chr(10) & "搜集了" & m & "条保养信息呢" & Chr(10) & "只用了0" & t & "秒啦啦啦~", , "~\(≧▽≦)/~"
+    user = MsgBox("完工" & Chr(10) & "搜集了" & m & "条保养信息呢" & Chr(10) & "只用了0" & t & "秒啦啦啦~" & Chr(10) & "本数据仅供参考，不做实际生产计划执行", 4, "~\(≧▽≦)/~")
+    If user = 7 Then
+    range2.Rows(1 & ":65536").Delete Shift:=xlShiftUp
+    wb2.Close False
+    End If
 End Sub
 
 
