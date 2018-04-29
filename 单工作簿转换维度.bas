@@ -1,69 +1,69 @@
-Attribute VB_Name = "µ¥¹¤×÷²¾×ª»»Î¬¶È"
-Sub µ¥¹¤×÷²¾×ª»»()
+Attribute VB_Name = "å•å·¥ä½œç°¿è½¬æ¢ç»´åº¦"
+Sub å•å·¥ä½œç°¿è½¬æ¢()
 
-Dim r, c 'Êı¾İÔ´±í¸ñµÄ×îºó·Ç¿Õµ¥Ôª¸ñ
+Dim r, c 'æ•°æ®æºè¡¨æ ¼çš„æœ€åéç©ºå•å…ƒæ ¼
 Dim wb As Workbook, range2 As Worksheet, wb2 As Workbook
 Dim month, row_num, year, m, t
-'±£Ñø¼Æ»®±íwb 'Ã÷Ï¸±írange2
+'ä¿å…»è®¡åˆ’è¡¨wb 'æ˜ç»†è¡¨range2
 Application.ScreenUpdating = False
     Set wb2 = Workbooks.Add(xlWBATWorksheet)
-    Set range2 = wb2.Sheets(1) '½«»ã×Ü±í¸³Öµ¸ørange2
-    'month = --Left(wb.Name, Application.Find("ÔÂ", wb.Name, 1) - 1)
-'µ÷ÓÃµ±Ç°±í¸ñ
-'»ñÈ¡µ±Ç°±í¸ñµÄ×î´óĞĞÊı
+    Set range2 = wb2.Sheets(1) 'å°†æ±‡æ€»è¡¨èµ‹å€¼ç»™range2
+    'month = --Left(wb.Name, Application.Find("æœˆ", wb.Name, 1) - 1)
+'è°ƒç”¨å½“å‰è¡¨æ ¼
+'è·å–å½“å‰è¡¨æ ¼çš„æœ€å¤§è¡Œæ•°
     t = Timer
     row_num = 2 'range2.UsedRange.Rows.Count
     'range2.Rows(row_num & ":65536").Delete Shift:=xlShiftUp
-    range2.Rows(row_num & ":65536").Clear 'Çå¿Õ»ã×Ü±íÖĞÔ´Êı¾İ
-    range2.Range("a1:e1") = Array("×Ô±àºÅ", "±£Ñø¼¶±ğ", "±£ÑøÈÕÆÚ", "±£Ñø³¡", "ÏßÂ·")
+    range2.Rows(row_num & ":65536").Clear 'æ¸…ç©ºæ±‡æ€»è¡¨ä¸­æºæ•°æ®
+    range2.Range("a1:e1") = Array("è‡ªç¼–å·", "ä¿å…»çº§åˆ«", "ä¿å…»æ—¥æœŸ", "ä¿å…»åœº", "çº¿è·¯")
 '    Dim filename
 '    filename = Dir(wb2.Path & "\*.xls")
 '    Do While filename <> "" '
-'        If filename <> wb2.Name Then 'ÅĞ¶ÏÎÄ¼şÊÇ·ñÊÇ»ã×ÜÊı¾İ¹¤×÷²¾
-'            Set wb = GetObject(wb2.Path & "\" & filename) '½«Òª»ã×ÜµÄ¹¤×÷²¾¸³Öµ¸ø±äÁ¿wb
-                'µÚÒ»²ãforÑ­»· ±éÀúÊı¾İÔ´µÄËùÓĞ¹¤×÷±ísheets(x)
+'        If filename <> wb2.Name Then 'åˆ¤æ–­æ–‡ä»¶æ˜¯å¦æ˜¯æ±‡æ€»æ•°æ®å·¥ä½œç°¿
+'            Set wb = GetObject(wb2.Path & "\" & filename) 'å°†è¦æ±‡æ€»çš„å·¥ä½œç°¿èµ‹å€¼ç»™å˜é‡wb
+                'ç¬¬ä¸€å±‚forå¾ªç¯ éå†æ•°æ®æºçš„æ‰€æœ‰å·¥ä½œè¡¨sheets(x)
                 Set wb = ThisWorkbook
                 year = Left(wb.Sheets(1).Cells(2, 1), 4) + 1
                 month = Mid(wb.Sheets(1).Cells(2, 1), 6, 2)
                 For x = 1 To wb.Worksheets.Count
                     Dim location As String
-                    '¸ø×Ö·û´®location¸³Öµµ±Ç°¹¤×÷±íµÄÃû×Ö×÷Îª±£ÑøµØµã
+                    'ç»™å­—ç¬¦ä¸²locationèµ‹å€¼å½“å‰å·¥ä½œè¡¨çš„åå­—ä½œä¸ºä¿å…»åœ°ç‚¹
                     location = wb.Sheets(x).Name
-                    'µÚ¶ş²ã&µÚÈı²ãforÑ­»·£¬±éÀúµ±Ç°¹¤×÷±íµÄËùÓĞµ¥Ôª¸ñ
+                    'ç¬¬äºŒå±‚&ç¬¬ä¸‰å±‚forå¾ªç¯ï¼Œéå†å½“å‰å·¥ä½œè¡¨çš„æ‰€æœ‰å•å…ƒæ ¼
                     For r = 5 To wb.Sheets(x).UsedRange.Rows.Count
                         For c = 3 To wb.Sheets(x).UsedRange.Columns.Count
                             Dim rng As Range
                             Set rng = wb.Sheets(x).Cells(r, c)
-                            'ÅĞ¶Ïµ±Ç°µ¥Ôª¸ñÊ××Ö·ûÊÇ·ñµÈÓÚ¡°3¡±
+                            'åˆ¤æ–­å½“å‰å•å…ƒæ ¼é¦–å­—ç¬¦æ˜¯å¦ç­‰äºâ€œ3â€
                                         If Left(rng.Value, 1) = "3" Then
                                         'Exit For
-                                        '²»³ÉÁ¢ÔğÅĞ¶¨µ±Ç°µ¥Ôª¸ñµÄĞĞ±êÌâÓëÁĞ±êÌâ£¬¼´±£ÑøÈÕÆÚºÍ±£Ñø¼¶±ğ
+                                        'ä¸æˆç«‹è´£åˆ¤å®šå½“å‰å•å…ƒæ ¼çš„è¡Œæ ‡é¢˜ä¸åˆ—æ ‡é¢˜ï¼Œå³ä¿å…»æ—¥æœŸå’Œä¿å…»çº§åˆ«
                                         
                             Dim xx, day, level As String, line As String
-                            'ÅĞ¶Ï»î¶¯µ¥Ôª¸ñµÄÁĞ±êÌâÊÇ·ñÎª¿Õ
-                            If InStr(rng.Value, "Â·") > 0 Then
-                                line = Mid(rng.Value, 7, InStr(rng.Value, "Â·") - 7)
+                            'åˆ¤æ–­æ´»åŠ¨å•å…ƒæ ¼çš„åˆ—æ ‡é¢˜æ˜¯å¦ä¸ºç©º
+                            If InStr(rng.Value, "è·¯") > 0 Then
+                                line = Mid(rng.Value, 7, InStr(rng.Value, "è·¯") - 7)
                             Else
                                 line = Right(rng.Value, 2)
                             End If
-                            'line = Mid(rng.Value, 7, Application.Find("Â·", rng.Value) - 7) '»ñÈ¡ÏßÂ·ºÅ
+                            'line = Mid(rng.Value, 7, Application.Find("è·¯", rng.Value) - 7) 'è·å–çº¿è·¯å·
                             num = rng.Column
                             xx = wb.Sheets(x).Cells(3, rng.Column).Value
                                 While xx = ""
                                     num = num - 1
                                     xx = wb.Sheets(x).Cells(3, num).Value
                                 Wend
-                            level = Left(xx, 2) '±£Ñø¼¶±ğ¸³Öµ
-                            'ÅĞ¶Ï»î¶¯µ¥Ôª¸ñµÄĞĞ±êÌâ
+                            level = Left(xx, 2) 'ä¿å…»çº§åˆ«èµ‹å€¼
+                            'åˆ¤æ–­æ´»åŠ¨å•å…ƒæ ¼çš„è¡Œæ ‡é¢˜
                             num = rng.Row
                             xx = wb.Sheets(x).Cells(rng.Row, 1).Value
                                 While xx = ""
                                     num = num - 1
                                     xx = wb.Sheets(x).Cells(num, 1).Value
                                 Wend
-                            day = xx '±£ÑøÈÕÆÚ¸³Öµ
+                            day = xx 'ä¿å…»æ—¥æœŸèµ‹å€¼
                             
-                            '¶Ôrang2Êä³öµ¥Ôª¸ñ½øĞĞ¸³Öµ
+                            'å¯¹rang2è¾“å‡ºå•å…ƒæ ¼è¿›è¡Œèµ‹å€¼
                             range2.Cells(row_num, 1) = Left(rng.Value, 5)
                             range2.Cells(row_num, 2) = level
                             range2.Cells(row_num, 3) = VBA.DateSerial(year, month, day)
@@ -77,12 +77,13 @@ Application.ScreenUpdating = False
                 Next x
 '                wb.Close False
 '            End If
-'            filename = Dir 'ÓÃdirº¯ÊıÈ¡µÃÆäËûÎÄ¼şÃû£¬²¢¸³Öµ¸ø±äÁ¿wb
+'            filename = Dir 'ç”¨dirå‡½æ•°å–å¾—å…¶ä»–æ–‡ä»¶åï¼Œå¹¶èµ‹å€¼ç»™å˜é‡wb
 '        Loop
     Columns.EntireColumn.AutoFit
     t = Timer - t
+      wb2.sheet(1).Range("A1:E1").AutoFilter
     Application.ScreenUpdating = True
-    MsgBox "Íê¹¤" & Chr(10) & "ËÑ¼¯ÁË" & m & "Ìõ±£ÑøĞÅÏ¢ÄØ" & Chr(10) & "Ö»ÓÃÁË0" & t & "ÃëÀ²À²À²~", , "~\(¨R¨Œ¨Q)/~"
+    MsgBox "å®Œå·¥" & Chr(10) & "æœé›†äº†" & m & "æ¡ä¿å…»ä¿¡æ¯å‘¢" & Chr(10) & "åªç”¨äº†0" & t & "ç§’å•¦å•¦å•¦~", , "~\(â‰§â–½â‰¦)/~"
 End Sub
 
 
