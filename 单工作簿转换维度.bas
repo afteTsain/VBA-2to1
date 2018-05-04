@@ -3,7 +3,7 @@ Sub 单工作簿转换()
 
 Dim r, c '数据源表格的最后非空单元格
 Dim wb As Workbook, range2 As Worksheet, wb2 As Workbook
-Dim month, row_num, year, m, t,user
+Dim month, row_num, year, m, t, user, week
 '保养计划表wb '明细表range2
 Application.ScreenUpdating = False
     Set wb2 = Workbooks.Add(xlWBATWorksheet)
@@ -15,7 +15,7 @@ Application.ScreenUpdating = False
     row_num = 2 'range2.UsedRange.Rows.Count
     'range2.Rows(row_num & ":65536").Delete Shift:=xlShiftUp
     range2.Rows(row_num & ":65536").Clear '清空汇总表中源数据
-    range2.Range("a1:e1") = Array("自编号", "保养级别", "保养日期", "保养场", "线路")
+    range2.Range("a1:f1") = Array("自编号", "线路", "保养日期", "星期", "地点", "保养级别")
 '    Dim filename
 '    filename = Dir(wb2.Path & "\*.xls")
 '    Do While filename <> "" '
@@ -53,7 +53,7 @@ Application.ScreenUpdating = False
                                     num = num - 1
                                     xx = wb.Sheets(x).Cells(3, num).Value
                                 Wend
-                            level = Left(xx, 2) '保养级别赋值
+                            level = Left(xx, 4) '保养级别赋值
                             '判断活动单元格的行标题
                             num = rng.Row
                             xx = wb.Sheets(x).Cells(rng.Row, 1).Value
@@ -61,15 +61,16 @@ Application.ScreenUpdating = False
                                     num = num - 1
                                     xx = wb.Sheets(x).Cells(num, 1).Value
                                 Wend
-                            day = xx '保养日期赋值                            
+                            day = xx '保养日期赋值
+                            week = "星期" & wb.Sheets(x).Cells(num, 2).Value
                             '对rang2输出单元格进行赋值
 '                            range2.Cells(row_num, 1) = Left(rng.Value, 5)
 '                            range2.Cells(row_num, 2) = level
 '                            range2.Cells(row_num, 3) = VBA.DateSerial(year, month, day)
 '                            range2.Cells(row_num, 4) = location
 '                            range2.Cells(row_num, 5) = line
-                            range2.Cells(row_num, 1).Resize(1, 5) = Array(Left(rng.Value, 5), level, VBA.DateSerial(year, month, day), location, line)
-                             row_num = row_num + 1
+                            range2.Cells(row_num, 1).Resize(1, 6) = Array(Left(rng.Value, 5), line, VBA.DateSerial(year, month, day), week, location, level)
+                            row_num = row_num + 1
                             m = m + 1
                             End If
                         Next c
@@ -83,7 +84,8 @@ Application.ScreenUpdating = False
     t = Timer - t
         range2.Range("A1:E1").AutoFilter
     Application.ScreenUpdating = True
-    user = MsgBox("完工" & Chr(10) & "搜集了" & m & "条保养信息呢" & Chr(10) & "只用了0" & t & "秒啦啦啦~" & Chr(10)  & Chr(10) & "本表数据仅供参考，不保证数据100%准确"& Chr(10) &"↑↑↑↑"& Chr(10) &"以上", 4, "~\(≧▽≦)/~")    
+    user = MsgBox("完工" & Chr(10) & "搜集了" & m & "条保养信息呢" & Chr(10) & "只用了0" & t & "秒啦啦啦~" & Chr(10) & Chr(10) & "本表数据仅供参考，不保证数据100%准确！" _
+    & Chr(10) & "如遇月底车辆划线，线路信息更新可能延迟！" & Chr(10) & "↑↑↑↑" & Chr(10) & "以上", 4, "~\(≧▽≦)/~")
     If user = 7 Then
         range2.Rows(1 & ":65536").Delete Shift:=xlShiftUp
         wb2.Close False
