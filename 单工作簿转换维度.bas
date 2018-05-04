@@ -61,8 +61,7 @@ Application.ScreenUpdating = False
                                     num = num - 1
                                     xx = wb.Sheets(x).Cells(num, 1).Value
                                 Wend
-                            day = xx '保养日期赋值
-                            
+                            day = xx '保养日期赋值                            
                             '对rang2输出单元格进行赋值
 '                            range2.Cells(row_num, 1) = Left(rng.Value, 5)
 '                            range2.Cells(row_num, 2) = level
@@ -84,8 +83,9 @@ Application.ScreenUpdating = False
     t = Timer - t
         range2.Range("A1:E1").AutoFilter
     Application.ScreenUpdating = True
-    user = MsgBox("完工" & Chr(10) & "搜集了" & m & "条保养信息呢" & Chr(10) & "只用了0" & t & "秒啦啦啦~" & Chr(10)  & Chr(10) & "本表数据仅供参考，不保证数据100%准确"& Chr(10) &"↑↑↑↑"& Chr(10) &"以上", 4, "~\(≧▽≦)/~")    If user = 7 Then
-    range2.Rows(1 & ":65536").Delete Shift:=xlShiftUp
-    wb2.Close False
+    user = MsgBox("完工" & Chr(10) & "搜集了" & m & "条保养信息呢" & Chr(10) & "只用了0" & t & "秒啦啦啦~" & Chr(10)  & Chr(10) & "本表数据仅供参考，不保证数据100%准确"& Chr(10) &"↑↑↑↑"& Chr(10) &"以上", 4, "~\(≧▽≦)/~")    
+    If user = 7 Then
+        range2.Rows(1 & ":65536").Delete Shift:=xlShiftUp
+        wb2.Close False
     End If
 End Sub
