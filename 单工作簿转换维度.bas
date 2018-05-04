@@ -3,7 +3,7 @@ Sub 单工作簿转换()
 
 Dim r, c '数据源表格的最后非空单元格
 Dim wb As Workbook, range2 As Worksheet, wb2 As Workbook
-Dim month, row_num, year, m, t
+Dim month, row_num, year, m, t,user
 '保养计划表wb '明细表range2
 Application.ScreenUpdating = False
     Set wb2 = Workbooks.Add(xlWBATWorksheet)
@@ -64,12 +64,13 @@ Application.ScreenUpdating = False
                             day = xx '保养日期赋值
                             
                             '对rang2输出单元格进行赋值
-                            range2.Cells(row_num, 1) = Left(rng.Value, 5)
-                            range2.Cells(row_num, 2) = level
-                            range2.Cells(row_num, 3) = VBA.DateSerial(year, month, day)
-                            range2.Cells(row_num, 4) = location
-                            range2.Cells(row_num, 5) = line
-                            row_num = row_num + 1
+'                            range2.Cells(row_num, 1) = Left(rng.Value, 5)
+'                            range2.Cells(row_num, 2) = level
+'                            range2.Cells(row_num, 3) = VBA.DateSerial(year, month, day)
+'                            range2.Cells(row_num, 4) = location
+'                            range2.Cells(row_num, 5) = line
+                            range2.Cells(row_num, 1).Resize(1, 5) = Array(Left(rng.Value, 5), level, VBA.DateSerial(year, month, day), location, line)
+                             row_num = row_num + 1
                             m = m + 1
                             End If
                         Next c
@@ -81,10 +82,10 @@ Application.ScreenUpdating = False
 '        Loop
     Columns.EntireColumn.AutoFit
     t = Timer - t
-      wb2.sheet(1).Range("A1:E1").AutoFilter
+        range2.Range("A1:E1").AutoFilter
     Application.ScreenUpdating = True
-    MsgBox "完工" & Chr(10) & "搜集了" & m & "条保养信息呢" & Chr(10) & "只用了0" & t & "秒啦啦啦~", , "~\(≧▽≦)/~"
+    user = MsgBox("完工" & Chr(10) & "搜集了" & m & "条保养信息呢" & Chr(10) & "只用了0" & t & "秒啦啦啦~" & Chr(10)  & Chr(10) & "本表数据仅供参考，不保证数据100%准确"& Chr(10) &"↑↑↑↑"& Chr(10) &"以上", 4, "~\(≧▽≦)/~")    If user = 7 Then
+    range2.Rows(1 & ":65536").Delete Shift:=xlShiftUp
+    wb2.Close False
+    End If
 End Sub
-
-
-
