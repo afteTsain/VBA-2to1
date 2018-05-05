@@ -14,4 +14,5 @@ ActiveWorkbook.Worksheets("车队").Sort.SortFields.Clear
         .SortMethod = xlPinYin
         .Apply
     End With
-    然而，我在eh上面找到的代码只用了一行“[a1].CurrentRegion.Sort key1:=[c1], order1:=1, Header:=1”就实现了关键字升序排序，感觉很烈害
+    然而，我在eh上面找到的代码只用了一行“[a1].CurrentRegion.Sort key1:=[c1], order1:=1, Header:=1”就实现了关键字升序排序，感觉很厉害。
+对了在测试的过程中发现用了好多并不需要的变量哦，有待优化ing
